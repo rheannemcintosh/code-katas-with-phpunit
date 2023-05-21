@@ -6,15 +6,20 @@ use PHPUnit\Framework\TestCase;
 
 class RomanNumeralsTest extends TestCase
 {
-    /** @test */
-    function it_generates_the_roman_numeral_for_1()
+    /**
+     * @test
+     * @dataProvider checks
+     */
+    function it_generates_the_roman_numeral($number, $numeral)
     {
-        $this->assertEquals('I', RomanNumerals::generate(1));
+        $this->assertEquals($numeral, RomanNumerals::generate($number));
     }
 
-    /** @test */
-    function it_generates_the_roman_numeral_for_2()
+    public static function checks()
     {
-        $this->assertEquals('II', RomanNumerals::generate(1));
+        return [
+            [1, 'I'],
+            [2, 'II'],
+        ];
     }
 }
