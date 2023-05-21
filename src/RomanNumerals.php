@@ -27,10 +27,8 @@ class RomanNumerals
         $result = '';
 
         foreach (static::NUMERALS as $numeral => $arabic) {
-            while ($number >= $arabic) {
+            for (; $number >= $arabic; $number -= $arabic) {
                 $result .= $numeral;
-
-                $number -= $arabic;
             }
         }
 
