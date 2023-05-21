@@ -8,10 +8,20 @@ class RomanNumerals
 {
     public static function generate($number)
     {
-        if ($number > 1) {
-            return 'II';
+        $result = '';
+
+        while ($number > 3) {
+            $result .= 'IV';
+
+            $number -= 4;
         }
-        
-        return 'I';
+
+        while ($number > 0) {
+            $result .= 'I';
+
+            $number -= 1;
+        }
+
+        return $result;
     }
 }
