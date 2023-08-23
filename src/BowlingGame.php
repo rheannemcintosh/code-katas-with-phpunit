@@ -18,8 +18,17 @@ class BowlingGame
         $roll = 0;
 
         foreach (range(1, self::FRAMES_PER_GAME) as $frame) {
+            // Check for a Strike
+            if ($this->rolls[$roll] === 10) {
+                $score += $this->rolls[$roll];
+                $score += $this->rolls[$roll + 1];
+                $score += $this->rolls[$roll + 2];
+
+                $roll += 1;
+            }
+
             // Check for a Spare
-            if($this->rolls[$roll] + $this->rolls[$roll + 1] === 10) {
+            else if ($this->rolls[$roll] + $this->rolls[$roll + 1] === 10) {
                 // You got a spare
                 $score += $this->rolls[$roll] + $this->rolls[$roll + 1];
                 $score += $this->rolls[$roll + 2];
