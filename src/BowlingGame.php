@@ -39,7 +39,7 @@ class BowlingGame
 
         foreach (range(1, self::FRAMES_PER_GAME) as $frame) {
             if ($this->isStrike($roll)) {
-                $score += $this->rolls[$roll] + $this->strikeBonus($roll);
+                $score += $this->pinCount($roll) + $this->strikeBonus($roll);
 
                 $roll += 1;
 
@@ -66,7 +66,7 @@ class BowlingGame
      */
     public function isStrike(int $roll): bool
     {
-        return $this->rolls[$roll] === 10;
+        return $this->pinCount($roll) === 10;
     }
 
     /**
@@ -88,7 +88,7 @@ class BowlingGame
      */
     public function defaultFrameScore(int $roll): int
     {
-        return $this->rolls[$roll] + $this->rolls[$roll + 1];
+        return $this->pinCount($roll) + $this->pinCount($roll + 1);
     }
 
     /**
@@ -99,7 +99,7 @@ class BowlingGame
      */
     protected function strikeBonus(int $roll): int
     {
-        return $this->defaultFrameScore($roll + 1);
+        return $this->pinCount($roll + 1) + $this->pinCount($roll + 2);
     }
 
     /**
@@ -110,6 +110,11 @@ class BowlingGame
      */
     protected function spareBonus(int $roll): int
     {
-        return $this->rolls[$roll + 2];
+        return $this->pinCount($roll + 2);
+    }
+
+    protected function pinCount($roll): int
+    {
+        return $this->rolls[$roll];
     }
 }
