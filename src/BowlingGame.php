@@ -18,29 +18,74 @@ class BowlingGame
         $roll = 0;
 
         foreach (range(1, self::FRAMES_PER_GAME) as $frame) {
-            // Check for a Strike
-            if ($this->rolls[$roll] === 10) {
+            if ($this->isStrike($roll)) {
                 $score += $this->rolls[$roll];
-                $score += $this->rolls[$roll + 1];
-                $score += $this->rolls[$roll + 2];
+                $score += $this->strikeBonus($roll);
 
                 $roll += 1;
+
+                continue;
             }
 
-            // Check for a Spare
-            else if ($this->rolls[$roll] + $this->rolls[$roll + 1] === 10) {
-                // You got a spare
-                $score += $this->rolls[$roll] + $this->rolls[$roll + 1];
-                $score += $this->rolls[$roll + 2];
-
-                    $roll += 2;
-            } else {
-                $score += $this->rolls[$roll] + $this->rolls[$roll + 1];
+            if ($this->isSpare($roll)) {
+                $score += $this->defaultFrameScore($roll);
+                $score += $this->spareBonus($roll);
 
                 $roll += 2;
+
+                continue;
             }
+
+            $score += $this->defaultFrameScore($roll);
+
+            $roll += 2;
         }
 
         return $score;
+    }
+
+    /**
+     * @param int $roll
+     * @return bool
+     */
+    public function isStrike(int $roll): bool
+    {
+        return $this->rolls[$roll] === 10;
+    }
+
+    /**
+     * @param int $roll
+     * @return bool
+     */
+    public function isSpare(int $roll): bool
+    {
+        return $this->defaultFrameScore($roll) === 10;
+    }
+
+    /**
+     * @param int $roll
+     * @return mixed
+     */
+    public function defaultFrameScore(int $roll): int
+    {
+        return $this->rolls[$roll] + $this->rolls[$roll + 1];
+    }
+
+    /**
+     * @param int $roll
+     * @return mixed
+     */
+    protected function strikeBonus(int $roll): int
+    {
+        return $this->rolls[$roll + 1] + $this->rolls[$roll + 2];
+    }
+
+    /**
+     * @param int $roll
+     * @return mixed
+     */
+    protected function spareBonus(int $roll): int
+    {
+        return $this->rolls[$roll + 2];
     }
 }
