@@ -96,4 +96,16 @@ class BowlingGameTest extends TestCase
 
         $this->assertSame(30, $game->score());
     }
+
+    /** @test */
+    function it_scores_a_perfect_game ()
+    {
+        $game = new BowlingGame();
+
+        foreach (range(1, 12) as $roll) {
+            $game->roll(10);
+        }
+
+        $this->assertSame(300, $game->score());
+    }
 }
