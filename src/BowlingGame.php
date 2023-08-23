@@ -39,24 +39,18 @@ class BowlingGame
 
         foreach (range(1, self::FRAMES_PER_GAME) as $frame) {
             if ($this->isStrike($roll)) {
-                $score += $this->rolls[$roll];
-                $score += $this->strikeBonus($roll);
+                $score += $this->rolls[$roll] + $this->strikeBonus($roll);
 
                 $roll += 1;
 
                 continue;
             }
 
-            if ($this->isSpare($roll)) {
-                $score += $this->defaultFrameScore($roll);
-                $score += $this->spareBonus($roll);
-
-                $roll += 2;
-
-                continue;
-            }
-
             $score += $this->defaultFrameScore($roll);
+
+            if ($this->isSpare($roll)) {
+                $score += $this->spareBonus($roll);
+            }
 
             $roll += 2;
         }
@@ -65,6 +59,8 @@ class BowlingGame
     }
 
     /**
+     * Determine if the current roll was a strike.
+     *
      * @param int $roll
      * @return bool
      */
@@ -74,6 +70,8 @@ class BowlingGame
     }
 
     /**
+     * Determine if the current frame was a spare.
+     *
      * @param int $roll
      * @return bool
      */
@@ -83,8 +81,10 @@ class BowlingGame
     }
 
     /**
+     * Calculate the score for the frame.
+     *
      * @param int $roll
-     * @return mixed
+     * @return int
      */
     public function defaultFrameScore(int $roll): int
     {
@@ -92,17 +92,21 @@ class BowlingGame
     }
 
     /**
+     * Get the bonus for a strike.
+     *
      * @param int $roll
-     * @return mixed
+     * @return int
      */
     protected function strikeBonus(int $roll): int
     {
-        return $this->rolls[$roll + 1] + $this->rolls[$roll + 2];
+        return $this->defaultFrameScore($roll + 1);
     }
 
     /**
+     * Get the bonus for a spare.
+     *
      * @param int $roll
-     * @return mixed
+     * @return int
      */
     protected function spareBonus(int $roll): int
     {
