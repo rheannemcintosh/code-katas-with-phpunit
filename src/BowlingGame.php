@@ -4,14 +4,34 @@ namespace App;
 
 class BowlingGame
 {
+    /**
+     * The number of frames in a game
+     */
     const FRAMES_PER_GAME = 10;
+
+    /**
+     * All rolls for the game.
+     *
+     * @var array
+     */
     protected array $rolls = [];
 
+    /**
+     * Roll the bowling ball.
+     *
+     * @param int $pins
+     * @return void
+     */
     public function roll(int $pins)
     {
         $this->rolls[] = $pins;
     }
 
+    /**
+     * Calculate the final score
+     *
+     * @return int
+     */
     public function score()
     {
         $score = 0;
