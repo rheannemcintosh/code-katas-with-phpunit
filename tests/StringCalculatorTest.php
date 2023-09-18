@@ -36,4 +36,12 @@ class StringCalculatorTest extends TestCase
 
         $this->assertSame(15, $calculator->add('1,2,3,4,5'));
     }
+
+    /** @test */
+    function it_accepts_a_new_line_character_as_a_delimiter_too()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertSame(10, $calculator->add("5\n5"));
+    }
 }
