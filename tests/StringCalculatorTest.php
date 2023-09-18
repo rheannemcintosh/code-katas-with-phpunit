@@ -28,4 +28,12 @@ class StringCalculatorTest extends TestCase
 
         $this->assertSame(10, $calculator->add('5,5'));
     }
+
+    /** @test */
+    function it_finds_the_sum_of_any_amount_of_numbers()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertSame(15, $calculator->add('1,2,3,4,5'));
+    }
 }
