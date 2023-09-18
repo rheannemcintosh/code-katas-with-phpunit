@@ -62,4 +62,12 @@ class StringCalculatorTest extends TestCase
 
         $this->assertEquals(5, $calculator->add("5,1001"));
     }
+
+    /** @test */
+    function it_supports_custom_delimiters()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertEquals(9, $calculator->add("//:\n5:4"));
+    }
 }

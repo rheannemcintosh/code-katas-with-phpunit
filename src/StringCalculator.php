@@ -6,11 +6,18 @@ class StringCalculator
 {
     public function add(string $numbers)
     {
+        $delimiter = ",|\n";
         if (! $numbers) {
             return 0;
         }
 
-        $numbers = preg_split("/,|\n/", $numbers);
+        if (preg_match("/\/\/(.)\n/", $numbers, $matches)) {
+            $delimiter = $matches[1];
+
+            $numbers = str_replace($matches[0], '', $numbers);
+        }
+
+        $numbers = preg_split("/{$delimiter}/", $numbers);
 
         foreach ($numbers as $number) {
             if ($number < 0 ) {
