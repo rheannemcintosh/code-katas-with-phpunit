@@ -19,16 +19,26 @@ class StringCalculator
 
         $numbers = preg_split("/{$delimiter}/", $numbers);
 
-        foreach ($numbers as $number) {
-            if ($number < 0 ) {
-                throw new \Exception('Negative numbers are disallowed');
-            }
-        }
+        $this->disallowNegatives($numbers);
 
         $numbers = array_filter($numbers, function($number) {
             return $number <= 1000;
         });
 
         return array_sum($numbers);
+    }
+
+    /**
+     * @param string $numbers
+     * @return void
+     * @throws \Exception
+     */
+    public function disallowNegatives(array $numbers): void
+    {
+        foreach ($numbers as $number) {
+            if ($number < 0 ) {
+                throw new \Exception('Negative numbers are disallowed');
+            }
+        }
     }
 }
