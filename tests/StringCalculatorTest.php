@@ -54,4 +54,12 @@ class StringCalculatorTest extends TestCase
 
         $calculator->add('5,-4');
     }
+
+    /** @test */
+    function numbers_greater_than_1000_are_ignored()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertEquals(5, $calculator->add("5,1001"));
+    }
 }
