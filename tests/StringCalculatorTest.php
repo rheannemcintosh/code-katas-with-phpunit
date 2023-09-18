@@ -50,7 +50,7 @@ class StringCalculatorTest extends TestCase
     {
         $calculator = new StringCalculator();
 
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         $calculator->add('5,-4');
     }
