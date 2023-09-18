@@ -14,32 +14,30 @@ class StringCalculator
             return 0;
         }
 
-        $numbers = $this->parseString($numbers);
+        $this->disallowNegatives($numbers = $this->parseString($numbers));
 
-        $this->disallowNegatives($numbers);
-
-        $numbers = $this->ignoreGreaterThanMaxNumberAllowed($numbers);
-
-        return array_sum($numbers);
+        return array_sum(
+            $this->ignoreGreaterThanMaxNumberAllowed($numbers)
+        );
     }
 
     /**
      * @param string $numbers
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function disallowNegatives(array $numbers): void
     {
         foreach ($numbers as $number) {
-            if ($number < 0 ) {
+            if ($number < 0) {
                 throw new \Exception('Negative numbers are disallowed');
             }
         }
     }
 
-    protected function parseString(string $numbers)
+    protected function parseString(string $numbers): array
     {
-        $customDelimiter = "\/\/(.)\n";
+        $customDelimiter = '\/\/(.)\n';
 
         if (preg_match("/{$customDelimiter}/", $numbers, $matches)) {
             $this->delimiter = $matches[1];
@@ -54,10 +52,10 @@ class StringCalculator
      * @param array|false $numbers
      * @return array|false
      */
-    public function ignoreGreaterThanMaxNumberAllowed(array $numbers)
+    public function ignoreGreaterThanMaxNumberAllowed(array $numbers): array
     {
-        return array_filter($numbers, function ($number) {
-            return $number <= self::MAX_NUMBER_ALLOWED;
-        });
+        return array_filter(
+            $numbers, fn($number) => $number <= self::MAX_NUMBER_ALLOWED
+        );
     }
 }

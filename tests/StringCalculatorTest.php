@@ -10,7 +10,7 @@ class StringCalculatorTest extends TestCase
     {
         $calculator = new StringCalculator();
 
-        $this->assertSame(0, $calculator->add(''));
+        $this->assertSame(0, $calculator->add(""));
     }
 
     /** @test */
