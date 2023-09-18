@@ -18,9 +18,7 @@ class StringCalculator
 
         $this->disallowNegatives($numbers);
 
-        $numbers = array_filter($numbers, function($number) {
-            return $number <= self::MAX_NUMBER_ALLOWED;
-        });
+        $numbers = $this->ignoreGreaterThanMaxNumberAllowed($numbers);
 
         return array_sum($numbers);
     }
@@ -50,5 +48,16 @@ class StringCalculator
         }
 
         return  preg_split("/{$this->delimiter}/", $numbers);
+    }
+
+    /**
+     * @param array|false $numbers
+     * @return array|false
+     */
+    public function ignoreGreaterThanMaxNumberAllowed(array $numbers)
+    {
+        return array_filter($numbers, function ($number) {
+            return $number <= self::MAX_NUMBER_ALLOWED;
+        });
     }
 }
