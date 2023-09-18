@@ -4,10 +4,26 @@ namespace App;
 
 class StringCalculator
 {
+    /**
+     * The maximum number allowed.
+     */
     const MAX_NUMBER_ALLOWED = 1000;
 
+    /**
+     * The delimiter for the numbers.
+     *
+     * @var string
+     */
     protected $delimiter = ",|\n";
 
+    /**
+     * Add the provided set of numbers.
+     *
+     * @param string $numbers
+     * @return int
+     *
+     * @throws Exception
+     */
     public function add(string $numbers)
     {
         if (! $numbers) {
@@ -22,8 +38,9 @@ class StringCalculator
     }
 
     /**
-     * @param string $numbers
-     * @return void
+     * Do not allow any negative numbers.
+     *
+     * @param array $numbers
      * @throws Exception
      */
     public function disallowNegatives(array $numbers): void
@@ -35,6 +52,12 @@ class StringCalculator
         }
     }
 
+    /**
+     * Parse the numbers string.
+     *
+     * @param string $numbers
+     * @return array
+     */
     protected function parseString(string $numbers): array
     {
         $customDelimiter = '\/\/(.)\n';
@@ -49,8 +72,10 @@ class StringCalculator
     }
 
     /**
-     * @param array|false $numbers
-     * @return array|false
+     * Forget any number that is not allowed.
+     *
+     * @param array $numbers
+     * @return array
      */
     public function ignoreGreaterThanMaxNumberAllowed(array $numbers): array
     {
