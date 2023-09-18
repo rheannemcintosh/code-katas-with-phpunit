@@ -13,7 +13,9 @@ class StringCalculator
             return 0;
         }
 
-        if (preg_match("/\/\/(.)\n/", $numbers, $matches)) {
+        $customDelimiter = "\/\/(.)\n";
+
+        if (preg_match("/{$customDelimiter}/", $numbers, $matches)) {
             $delimiter = $matches[1];
 
             $numbers = str_replace($matches[0], '', $numbers);
