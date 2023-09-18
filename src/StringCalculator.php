@@ -4,6 +4,8 @@ namespace App;
 
 class StringCalculator
 {
+    const MAX_NUMBER_ALLOWED = 1000;
+
     public function add(string $numbers)
     {
         $delimiter = ",|\n";
@@ -22,7 +24,7 @@ class StringCalculator
         $this->disallowNegatives($numbers);
 
         $numbers = array_filter($numbers, function($number) {
-            return $number <= 1000;
+            return $number <= self::MAX_NUMBER_ALLOWED;
         });
 
         return array_sum($numbers);
