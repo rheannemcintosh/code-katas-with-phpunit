@@ -20,4 +20,12 @@ class StringCalculatorTest extends TestCase
 
         $this->assertSame(5, $calculator->add('5'));
     }
+
+    /** @test */
+    function it_finds_the_sum_of_two_numbers()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertSame(10, $calculator->add('5,5'));
+    }
 }
