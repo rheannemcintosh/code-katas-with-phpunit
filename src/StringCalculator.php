@@ -6,22 +6,15 @@ class StringCalculator
 {
     const MAX_NUMBER_ALLOWED = 1000;
 
+    protected $delimiter = ",|\n";
+
     public function add(string $numbers)
     {
-        $delimiter = ",|\n";
         if (! $numbers) {
             return 0;
         }
 
-        $customDelimiter = "\/\/(.)\n";
-
-        if (preg_match("/{$customDelimiter}/", $numbers, $matches)) {
-            $delimiter = $matches[1];
-
-            $numbers = str_replace($matches[0], '', $numbers);
-        }
-
-        $numbers = preg_split("/{$delimiter}/", $numbers);
+        $numbers = $this->parseString($numbers);
 
         $this->disallowNegatives($numbers);
 
@@ -44,5 +37,18 @@ class StringCalculator
                 throw new \Exception('Negative numbers are disallowed');
             }
         }
+    }
+
+    protected function parseString(string $numbers)
+    {
+        $customDelimiter = "\/\/(.)\n";
+
+        if (preg_match("/{$customDelimiter}/", $numbers, $matches)) {
+            $this->delimiter = $matches[1];
+
+            $numbers = str_replace($matches[0], '', $numbers);
+        }
+
+        return  preg_split("/{$this->delimiter}/", $numbers);
     }
 }
