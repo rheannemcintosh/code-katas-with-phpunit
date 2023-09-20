@@ -54,7 +54,9 @@ class TennisMatch
 
     protected function isDeuce()
     {
-        return $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3 && $this->playerOnePoints === $this->playerTwoPoints;
+        $canBeWon = $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3;
+        
+        return $canBeWon && $this->playerOnePoints === $this->playerTwoPoints;
     }
 
     protected function pointsToScore($points)
