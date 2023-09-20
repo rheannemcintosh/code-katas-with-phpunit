@@ -13,6 +13,10 @@ class TennisMatch
             return 'Winner: Player 1';
         }
 
+        if($this->playerTwoPoints > 3 && $this->playerTwoPoints >= $this->playerOnePoints +2) {
+            return 'Winner: Player 2';
+        }
+
         return sprintf(
             "%s-%s",
             $this->pointsToScore($this->playerOnePoints),
