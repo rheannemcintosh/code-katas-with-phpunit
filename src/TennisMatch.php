@@ -4,10 +4,15 @@ namespace App;
 
 class TennisMatch
 {
+    /** @var Player  */
     protected Player $playerOne;
+
+    /** @var Player */
     protected Player $playerTwo;
 
     /**
+     * Create a new Tennis Match.
+     *
      * @param $playerOne
      * @param $playerTwo
      */
@@ -17,7 +22,12 @@ class TennisMatch
         $this->playerTwo = $playerTwo;
     }
 
-    public function score()
+    /**
+     * Score the match.
+     *
+     * @return string
+     */
+    public function score(): string
     {
         if ($this->hasWinner()) {
             return 'Winner: ' . $this->leader()->name;
@@ -38,7 +48,12 @@ class TennisMatch
         );
     }
 
-    protected function hasWinner()
+    /**
+     * Determine if there is a winner.
+     * 
+     * @return bool
+     */
+    protected function hasWinner(): bool
     {
         if (max([$this->playerOne->points, $this->playerTwo->points]) < 4) {
             return false;
@@ -47,17 +62,33 @@ class TennisMatch
         return abs($this->playerOne->points - $this->playerTwo->points) >= 2;
     }
 
+    /**
+     * Get the current leader of the set.
+     * 
+     * @return Player
+     */
     protected function leader(): Player
     {
         return $this->playerOne->points > $this->playerTwo->points ? $this->playerOne : $this->playerTwo;
     }
 
-    protected function isDeuce()
+    /**
+     * Determine if the players are in deuce.
+     * 
+     * @return bool
+     */
+    protected function isDeuce(): bool
     {
-        return $this->canBeWon() && $this->playerOne->points === $this->playerTwo->points;
+        return $this->hasReachedDeuceThreshold() && $this->playerOne->points === $this->playerTwo->points;
     }
 
-    protected function pointsToScore($points)
+    /**
+     * Convert the player's score to the Tennis term.
+     *
+     * @param $points
+     * @return string
+     */
+    protected function pointsToScore($points): string
     {
         switch ($points) {
             case 0:
@@ -71,16 +102,21 @@ class TennisMatch
         }
     }
 
-    protected function hasAdvantage()
+    /**
+     * Determine if one player has the advantage.
+     * 
+     * @return bool
+     */
+    protected function hasAdvantage(): bool
     {
-        if(! $this->canBeWon()) {
+        if(! $this->hasReachedDeuceThreshold()) {
             return false;
         }
 
         return ! $this->isDeuce();
     }
 
-    protected function canBeWon()
+    protected function hasReachedDeuceThreshold()
     {
         return $this->playerOne->points >= 3 && $this->playerTwo->points >= 3;
     }
