@@ -10,7 +10,7 @@ class TennisMatch
     public function score()
     {
         if ($this->hasWinner()) {
-            return $this->playerOnePoints > $this->playerTwoPoints ? 'Winner: Player 1' : 'Winner: Player 2';
+            return 'Winner: ' . $this->leader();
         }
 
         return sprintf(
@@ -30,7 +30,7 @@ class TennisMatch
         $this->playerTwoPoints++;
     }
 
-    public function hasWinner()
+    protected function hasWinner()
     {
         if($this->playerOnePoints > 3 && $this->playerOnePoints >= $this->playerTwoPoints +2) {
             return true;
@@ -41,6 +41,11 @@ class TennisMatch
         }
 
         return false;
+    }
+
+    protected function leader(): string
+    {
+        return $this->playerOnePoints > $this->playerTwoPoints ? 'Player 1' : 'Player 2';
     }
 
     protected function pointsToScore($points)
