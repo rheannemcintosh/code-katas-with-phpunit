@@ -10,6 +10,7 @@ class TennisMatchTest extends TestCase
         return [
             [0, 0, 'love-love'],
             [1, 0, 'fifteen-love'],
+            [1, 1, 'fifteen-fifteen'],
             [2, 0, 'thirty-love'],
             [3, 0, 'forty-love'],
         ];
@@ -25,6 +26,10 @@ class TennisMatchTest extends TestCase
 
         for ($i = 0; $i < $playerOnePoints; $i++) {
             $match->pointToPlayerOne();
+        }
+
+        for ($i = 0; $i < $playerTwoPoints; $i++) {
+            $match->pointToPlayerTwo();
         }
 
         $this->assertEquals($score, $match->score());

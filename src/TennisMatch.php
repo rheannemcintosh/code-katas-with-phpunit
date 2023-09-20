@@ -21,6 +21,11 @@ class TennisMatch
         $this->playerOnePoints++;
     }
 
+    public function pointToPlayerTwo()
+    {
+        $this->playerTwoPoints++;
+    }
+
     protected function pointsToScore($points)
     {
         switch ($points) {
