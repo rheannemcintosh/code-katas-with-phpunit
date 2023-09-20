@@ -5,32 +5,27 @@ use PHPUnit\Framework\TestCase;
 
 class TennisMatchTest extends TestCase
 {
-    /** @test */
-    function it_scores_0_to_0()
+    public function scores()
     {
-        $match = new TennisMatch();
-
-        $this->assertEquals('love-love', $match->score());
+        return [
+            [0, 0, 'love-love'],
+            [1, 0, 'fifteen-love'],
+            [2, 0, 'thirty-love'],
+        ];
     }
 
-    /** @test */
-    function it_scores_1_to_0()
+    /**
+     * @test
+     * @dataProvider scores
+     */
+    function it_scores_a_tennis_match($playerOnePoints, $playerTwoPoints, $score)
     {
         $match = new TennisMatch();
 
-        $match->pointToPlayerOne();
+        for ($i = 0; $i < $playerOnePoints; $i++) {
+            $match->pointToPlayerOne();
+        }
 
-        $this->assertEquals('fifteen-love', $match->score());
-    }
-
-    /** @test */
-    function it_scores_2_to_0()
-    {
-        $match = new TennisMatch();
-
-        $match->pointToPlayerOne();
-        $match->pointToPlayerOne();
-
-        $this->assertEquals('thirty-love', $match->score());
+        $this->assertEquals($score, $match->score());
     }
 }
