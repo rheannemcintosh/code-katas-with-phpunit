@@ -4,14 +4,14 @@ namespace App;
 
 class TennisMatch
 {
-    protected $playerOnePoints = 0;
-    protected $playerTwoPoints = 0;
+    protected Player $playerOne;
+    protected Player $playerTwo;
 
     /**
      * @param $playerOne
      * @param $playerTwo
      */
-    public function __construct($playerOne, $playerTwo)
+    public function __construct(Player $playerOne, Player $playerTwo)
     {
         $this->playerOne = $playerOne;
         $this->playerTwo = $playerTwo;
@@ -20,11 +20,11 @@ class TennisMatch
     public function score()
     {
         if ($this->hasWinner()) {
-            return 'Winner: ' . $this->leader();
+            return 'Winner: ' . $this->leader()->name;
         }
 
         if ($this->hasAdvantage()) {
-            return 'Advantage: ' . $this->leader();
+            return 'Advantage: ' . $this->leader()->name;
         }
 
         if ($this->isDeuce()) {
@@ -33,42 +33,47 @@ class TennisMatch
 
         return sprintf(
             "%s-%s",
-            $this->pointsToScore($this->playerOnePoints),
-            $this->pointsToScore($this->playerTwoPoints)
+            $this->pointsToScore($this->playerOne->points),
+            $this->pointsToScore($this->playerTwo->points)
         );
     }
 
     public function pointToPlayerOne()
     {
-        $this->playerOnePoints++;
+        $this->playerOne->points++;
     }
 
     public function pointToPlayerTwo()
     {
-        $this->playerTwoPoints++;
+        $this->playerTwo->points++;
+    }
+
+    public function pointTo(Player $player)
+    {
+        $player->score();
     }
 
     protected function hasWinner()
     {
-        if($this->playerOnePoints > 3 && $this->playerOnePoints >= $this->playerTwoPoints +2) {
+        if($this->playerOne->points > 3 && $this->playerOne->points >= $this->playerTwo->points +2) {
             return true;
         }
 
-        if($this->playerTwoPoints > 3 && $this->playerTwoPoints >= $this->playerOnePoints +2) {
+        if($this->playerTwo->points > 3 && $this->playerTwo->points >= $this->playerOne->points +2) {
             return true;
         }
 
         return false;
     }
-    
-    protected function leader(): string
+
+    protected function leader(): Player
     {
-        return $this->playerOnePoints > $this->playerTwoPoints ? $this->playerOne : $this->playerTwo;
+        return $this->playerOne->points > $this->playerTwo->points ? $this->playerOne : $this->playerTwo;
     }
 
     protected function isDeuce()
     {
-        return $this->canBeWon() && $this->playerOnePoints === $this->playerTwoPoints;
+        return $this->canBeWon() && $this->playerOne->points === $this->playerTwo->points;
     }
 
     protected function pointsToScore($points)
@@ -96,6 +101,6 @@ class TennisMatch
 
     protected function canBeWon()
     {
-        return $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3;
+        return $this->playerOne->points >= 3 && $this->playerTwo->points >= 3;
     }
 }

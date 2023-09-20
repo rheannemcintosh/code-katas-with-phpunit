@@ -1,5 +1,6 @@
 <?php
 
+use App\Player;
 use App\TennisMatch;
 use PHPUnit\Framework\TestCase;
 
@@ -30,14 +31,17 @@ class TennisMatchTest extends TestCase
      */
     function it_scores_a_tennis_match($playerOnePoints, $playerTwoPoints, $score)
     {
-        $match = new TennisMatch('John', 'Jane');
+        $match = new TennisMatch(
+            $john = new Player('John'),
+            $jane = new Player('Jane'),
+        );
 
         for ($i = 0; $i < $playerOnePoints; $i++) {
-            $match->pointToPlayerOne();
+            $match->pointTo($john);
         }
 
         for ($i = 0; $i < $playerTwoPoints; $i++) {
-            $match->pointToPlayerTwo();
+            $match->pointTo($jane);
         }
 
         $this->assertEquals($score, $match->score());
