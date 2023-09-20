@@ -11,6 +11,7 @@ class TennisMatchTest extends TestCase
             [0, 0, 'love-love'],
             [1, 0, 'fifteen-love'],
             [2, 0, 'thirty-love'],
+            [3, 0, 'forty-love'],
         ];
     }
 

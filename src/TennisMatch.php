@@ -9,6 +9,10 @@ class TennisMatch
 
     public function score()
     {
+        if ($this->playerOnePoints > $this->playerTwoPoints + 2) {
+            return 'forty-love';
+        }
+
         if ($this->playerOnePoints > $this->playerTwoPoints + 1) {
             return 'thirty-love';
         }
