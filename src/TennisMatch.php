@@ -60,9 +60,7 @@ class TennisMatch
 
     protected function isDeuce()
     {
-        $canBeWon = $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3;
-
-        return $canBeWon && $this->playerOnePoints === $this->playerTwoPoints;
+        return $this->canBeWon() && $this->playerOnePoints === $this->playerTwoPoints;
     }
 
     protected function pointsToScore($points)
@@ -81,14 +79,19 @@ class TennisMatch
 
     protected function hasAdvantage()
     {
-        if ($this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3 && $this->playerOnePoints > $this->playerTwoPoints) {
+        if ($this->canBeWon() && $this->playerOnePoints > $this->playerTwoPoints) {
             return true;
         }
 
-        if ($this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3 && $this->playerTwoPoints > $this->playerOnePoints) {
+        if ($this->canBeWon() && $this->playerTwoPoints > $this->playerOnePoints) {
             return true;
         }
 
         return false;
+    }
+
+    protected function canBeWon()
+    {
+        return $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3;
     }
 }
