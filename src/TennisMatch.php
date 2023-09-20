@@ -13,7 +13,7 @@ class TennisMatch
             return 'Winner: ' . $this->leader();
         }
 
-        if ($this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3 && $this->playerOnePoints === $this->playerTwoPoints) {
+        if ($this->isDeuce()) {
             return 'deuce';
         }
 
@@ -50,6 +50,11 @@ class TennisMatch
     protected function leader(): string
     {
         return $this->playerOnePoints > $this->playerTwoPoints ? 'Player 1' : 'Player 2';
+    }
+
+    protected function isDeuce()
+    {
+        return $this->playerOnePoints >= 3 && $this->playerTwoPoints >= 3 && $this->playerOnePoints === $this->playerTwoPoints;
     }
 
     protected function pointsToScore($points)
