@@ -40,15 +40,11 @@ class TennisMatch
 
     protected function hasWinner()
     {
-        if($this->playerOne->points > 3 && $this->playerOne->points >= $this->playerTwo->points +2) {
-            return true;
+        if (max([$this->playerOne->points, $this->playerTwo->points]) < 4) {
+            return false;
         }
 
-        if($this->playerTwo->points > 3 && $this->playerTwo->points >= $this->playerOne->points +2) {
-            return true;
-        }
-
-        return false;
+        return abs($this->playerOne->points - $this->playerTwo->points) >= 2;
     }
 
     protected function leader(): Player
