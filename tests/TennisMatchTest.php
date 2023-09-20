@@ -15,10 +15,10 @@ class TennisMatchTest extends TestCase
             [2, 2, 'thirty-thirty'],
             [3, 0, 'forty-love'],
             [3, 3, 'deuce'],
-            [3, 4, 'Advantage: Player 2'],
-            [4, 0, 'Winner: Player 1'],
-            [0, 4, 'Winner: Player 2'],
-            [4, 3, 'Advantage: Player 1'],
+            [3, 4, 'Advantage: Jane'],
+            [4, 0, 'Winner: John'],
+            [0, 4, 'Winner: Jane'],
+            [4, 3, 'Advantage: John'],
             [4, 4, 'deuce'],
             [5, 5, 'deuce'],
         ];
@@ -30,7 +30,7 @@ class TennisMatchTest extends TestCase
      */
     function it_scores_a_tennis_match($playerOnePoints, $playerTwoPoints, $score)
     {
-        $match = new TennisMatch();
+        $match = new TennisMatch('John', 'Jane');
 
         for ($i = 0; $i < $playerOnePoints; $i++) {
             $match->pointToPlayerOne();

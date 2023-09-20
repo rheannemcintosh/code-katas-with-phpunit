@@ -7,6 +7,16 @@ class TennisMatch
     protected $playerOnePoints = 0;
     protected $playerTwoPoints = 0;
 
+    /**
+     * @param $playerOne
+     * @param $playerTwo
+     */
+    public function __construct($playerOne, $playerTwo)
+    {
+        $this->playerOne = $playerOne;
+        $this->playerTwo = $playerTwo;
+    }
+
     public function score()
     {
         if ($this->hasWinner()) {
@@ -50,12 +60,10 @@ class TennisMatch
 
         return false;
     }
-
-
-
+    
     protected function leader(): string
     {
-        return $this->playerOnePoints > $this->playerTwoPoints ? 'Player 1' : 'Player 2';
+        return $this->playerOnePoints > $this->playerTwoPoints ? $this->playerOne : $this->playerTwo;
     }
 
     protected function isDeuce()
