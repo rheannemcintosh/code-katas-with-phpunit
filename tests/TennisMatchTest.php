@@ -22,4 +22,15 @@ class TennisMatchTest extends TestCase
 
         $this->assertEquals('fifteen-love', $match->score());
     }
+
+    /** @test */
+    function it_scores_2_to_0()
+    {
+        $match = new TennisMatch();
+
+        $match->pointToPlayerOne();
+        $match->pointToPlayerOne();
+
+        $this->assertEquals('thirty-love', $match->score());
+    }
 }
