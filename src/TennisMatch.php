@@ -9,22 +9,29 @@ class TennisMatch
 
     public function score()
     {
-        if ($this->playerOnePoints > $this->playerTwoPoints + 2) {
-            return 'forty-love';
-        }
-
-        if ($this->playerOnePoints > $this->playerTwoPoints + 1) {
-            return 'thirty-love';
-        }
-
-        if ($this->playerOnePoints > $this->playerTwoPoints) {
-            return 'fifteen-love';
-        }
-        return 'love-love';
+        return sprintf(
+            "%s-%s",
+            $this->pointsToScore($this->playerOnePoints),
+            $this->pointsToScore($this->playerTwoPoints)
+        );
     }
 
     public function pointToPlayerOne()
     {
         $this->playerOnePoints++;
+    }
+
+    protected function pointsToScore($points)
+    {
+        switch ($points) {
+            case 0:
+                return 'love';
+            case 1:
+                return 'fifteen';
+            case 2:
+                return 'thirty';
+            case 3:
+                return 'forty';
+        }
     }
 }
