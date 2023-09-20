@@ -9,6 +9,10 @@ class TennisMatch
 
     public function score()
     {
+        if($this->playerOnePoints > 3 && $this->playerOnePoints >= $this->playerTwoPoints +2) {
+            return 'Winner: Player 1';
+        }
+
         return sprintf(
             "%s-%s",
             $this->pointsToScore($this->playerOnePoints),
