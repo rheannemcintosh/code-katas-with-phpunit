@@ -79,15 +79,11 @@ class TennisMatch
 
     protected function hasAdvantage()
     {
-        if ($this->canBeWon() && $this->playerOnePoints > $this->playerTwoPoints) {
-            return true;
+        if(! $this->canBeWon()) {
+            return false;
         }
 
-        if ($this->canBeWon() && $this->playerTwoPoints > $this->playerOnePoints) {
-            return true;
-        }
-
-        return false;
+        return ! $this->isDeuce();
     }
 
     protected function canBeWon()
