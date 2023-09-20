@@ -38,21 +38,6 @@ class TennisMatch
         );
     }
 
-    public function pointToPlayerOne()
-    {
-        $this->playerOne->points++;
-    }
-
-    public function pointToPlayerTwo()
-    {
-        $this->playerTwo->points++;
-    }
-
-    public function pointTo(Player $player)
-    {
-        $player->score();
-    }
-
     protected function hasWinner()
     {
         if($this->playerOne->points > 3 && $this->playerOne->points >= $this->playerTwo->points +2) {
