@@ -2,6 +2,10 @@
 
 namespace App;
 
-class BowlingGame
+class FizzBuzz
 {
+    public static function convert(int $number)
+    {
+        return 'fizz';
+    }
 }
