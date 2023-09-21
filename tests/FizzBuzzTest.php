@@ -8,6 +8,8 @@ class FizzBuzzTest extends TestCase
     /** @test */
     function it_returns_fizz_for_multiples_of_three()
     {
-        $this->assertEquals('fizz', FizzBuzz::convert(3));
+        foreach ([3, 6, 9, 12] as $number) {
+            $this->assertEquals('fizz', FizzBuzz::convert($number));
+        }
     }
 }
