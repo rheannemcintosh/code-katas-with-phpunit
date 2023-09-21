@@ -7,7 +7,7 @@ class FizzBuzz
     public static function convert(int $number)
     {
         $result = '';
-        
+
         if ($number % 3 == 0)  {
             $result .= 'fizz';
         }
@@ -15,7 +15,7 @@ class FizzBuzz
         if ($number % 5 == 0)  {
             $result .= 'buzz';
         }
-
-        return $result;
+        
+        return $result ?: $number;
     }
 }

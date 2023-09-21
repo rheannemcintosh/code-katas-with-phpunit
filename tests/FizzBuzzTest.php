@@ -28,4 +28,12 @@ class FizzBuzzTest extends TestCase
             $this->assertEquals('fizzbuzz', FizzBuzz::convert($number));
         }
     }
+
+    /** @test */
+    function it_returns_the_original_number_if_not_divisible_by_three_or_five()
+    {
+        foreach ([1, 2, 4, 7, 8, 11] as $number) {
+            $this->assertEquals($number, FizzBuzz::convert($number));
+        }
+    }
 }
