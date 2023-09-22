@@ -36,6 +36,10 @@ class GildedRose
             return $this->sulfurasTick();
         }
 
+        if ($this->name === 'Backstage passes to a TAFKAL80ETC concert') {
+            return $this->passTick();
+        }
+
         if ($this->name != 'Aged Brie' and $this->name != 'Backstage passes to a TAFKAL80ETC concert') {
             if ($this->quality > 0) {
                 if ($this->name != 'Sulfuras, Hand of Ragnaros') {
@@ -114,5 +118,28 @@ class GildedRose
 
     private function sulfurasTick()
     {
+    }
+
+    private function passTick()
+    {
+        $this->quality += 1;
+
+        if ($this->sellIn <= 10) {
+            $this->quality += 1;
+        }
+
+        if ($this->sellIn <= 5) {
+            $this->quality += 1;
+        }
+
+        if ($this->sellIn <= 0) {
+            $this->quality = 0;
+        }
+
+        if ($this->quality > 50) {
+            $this->quality = 50;
+        }
+
+        $this->sellIn -= 1;
     }
 }
