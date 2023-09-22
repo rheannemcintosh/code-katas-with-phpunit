@@ -78,7 +78,7 @@ class BottlesSongTest extends TestCase
             Take one down and pass it around
             No more bottles of beer on the wall
             
-        EOT;
+            EOT;
 
         $result = (new BottlesSong)->verse(1);
 
@@ -94,7 +94,7 @@ class BottlesSongTest extends TestCase
             Go to the store and buy some more
             99 bottles of beer on the wall
             
-        EOT;
+            EOT;
 
         $result = (new BottlesSong)->verse(0);
 
