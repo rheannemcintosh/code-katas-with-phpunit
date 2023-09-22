@@ -79,15 +79,14 @@ class GildedRose
     private function normalTick()
     {
         $this->sellIn -= 1;
+        $this->quality -= 1;
 
-        if ($this->quality <= 0) {
-            return;
+        if ($this->sellIn <=0) {
+            $this->quality -= 1;
         }
 
-        $this->quality -= 1;
-        
-        if ($this->sellIn <=0 && $this->quality > 0) {
-            $this->quality -= 1;
+        if ($this->quality < 0) {
+            $this->quality = 0;
         }
     }
 }
