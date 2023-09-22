@@ -32,6 +32,10 @@ class GildedRose
             return $this->brieTick();
         }
 
+        if ($this->name === 'Sulfuras, Hand of Ragnaros') {
+            return $this->sulfurasTick();
+        }
+
         if ($this->name != 'Aged Brie' and $this->name != 'Backstage passes to a TAFKAL80ETC concert') {
             if ($this->quality > 0) {
                 if ($this->name != 'Sulfuras, Hand of Ragnaros') {
@@ -106,5 +110,9 @@ class GildedRose
         if ($this->quality > 50) {
             $this->quality = 50;
         }
+    }
+
+    private function sulfurasTick()
+    {
     }
 }
