@@ -4,6 +4,12 @@ namespace App;
 
 class BottlesSong
 {
+    public function sing()
+    {
+        return implode("\n", array_map(function ($number) {
+            return $this->verse($number);
+        }, range(99, 0)));
+    }
 
     public function verse($number)
     {
