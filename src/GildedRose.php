@@ -24,6 +24,10 @@ class GildedRose
 
     public function tick()
     {
+        if ($this->name === 'normal') {
+            return $this->normalTick();
+        }
+
         if ($this->name != 'Aged Brie' and $this->name != 'Backstage passes to a TAFKAL80ETC concert') {
             if ($this->quality > 0) {
                 if ($this->name != 'Sulfuras, Hand of Ragnaros') {
@@ -69,6 +73,21 @@ class GildedRose
                     $this->quality = $this->quality + 1;
                 }
             }
+        }
+    }
+
+    private function normalTick()
+    {
+        $this->sellIn -= 1;
+
+        if ($this->quality <= 0) {
+            return;
+        }
+
+        $this->quality -= 1;
+        
+        if ($this->sellIn <=0 && $this->quality > 0) {
+            $this->quality -= 1;
         }
     }
 }
