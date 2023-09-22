@@ -29,7 +29,7 @@ class BottlesSongTest extends TestCase
             98 bottles of beer
             Take one down and pass it around
             97 bottles of beer on the wall
-        
+            
             EOT;
 
         $result = (new BottlesSong)->verse(98);

@@ -6,9 +6,15 @@ class BottlesSong
 {
     public function sing()
     {
-        return implode("\n", array_map(function ($number) {
-            return $this->verse($number);
-        }, range(99, 0)));
+        return $this->verses(99, 0);
+    }
+
+    public function verses($start, $end)
+    {
+        return implode("\n", array_map(
+            fn($number) => $this->verse($number),
+            range($start, $end)
+        ));
     }
 
     public function verse($number)
