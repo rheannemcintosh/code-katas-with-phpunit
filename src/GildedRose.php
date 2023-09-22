@@ -2,6 +2,8 @@
 
 namespace App;
 
+use InvalidArgumentException;
+
 class GildedRose
 {
     private static $items = [
@@ -14,6 +16,10 @@ class GildedRose
 
     public static function of($name, $quality, $sellIn)
     {
+        if (! array_key_exists($name, self::$items)) {
+            throw new InvalidArgumentException('Item type does not exist.');
+        }
+
         $class = self::$items[$name];
 
         return new $class($quality, $sellIn);

@@ -366,4 +366,13 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(0, $item->quality);
         $this->assertEquals(-11, $item->sellIn);
     }
+
+    /** @test */
+    function it_throws_an_argument_exception_when_an_unknown_item_is_passed_in()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Item type does not exist.');
+
+        $item = GildedRose::of('Java', 20, 10);
+    }
 }
